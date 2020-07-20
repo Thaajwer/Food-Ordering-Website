@@ -1,0 +1,247 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="user.master.cs" Inherits="user_user" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Shop Around</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<!--[if lte IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
+<script src="js/jquery-1.4.1.min.js" type="text/javascript"></script>
+<script src="js/jquery.jcarousel.pack.js" type="text/javascript"></script>
+<script src="js/jquery-func.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="f1" runat="server">  
+
+      
+
+<!-- Shell -->
+<div class="shell">
+  <!-- Header -->
+  <div id="header">
+    <h1 id="logo"><a href="#"></a></h1>
+    <!-- Cart -->
+    <div id="cart"> <a href="view_cart.aspx" class="cart-link">Your Food bucket</a>
+      <div class="cl">&nbsp;</div>
+      <span>Total food: <asp:Label ID="carttotitem" runat="server" Text="0"></asp:Label></span>&nbsp; <span>Cost:<asp:Label ID="carttotprice" runat="server" Text="0"></asp:Label>$</span> </div>
+    <!-- End Cart -->
+    <!-- Navigation -->
+    <div id="navigation">
+      <ul>
+        
+        
+       <!-- <li><a href="#">My Account</a></li>-->
+        <li><a href="display_item.aspx">Food Bucket</a></li>
+        <li><a href="registration.aspx">Registration</a></li>
+
+          <%
+              if(Session["user"] == null)
+              {
+                  %>
+
+               <li><a href="login.aspx">Login</a></li>
+          <%
+
+              }
+              else
+              {
+
+                    %>
+
+              <li><a href="display_order.aspx">Display order</a></li>
+
+               <li><a href="logout.aspx">Logout</a></li>
+          <%
+
+              }
+
+
+               %>
+          <li><a href="contact_us.aspx">Contact Us</a></li>
+
+          <li><a href="adminlogin.aspx">Admin</a></li>
+
+          
+      </ul>
+    </div>
+    <!-- End Navigation -->
+  </div>
+  <!-- End Header -->
+  <!-- Main -->
+  <div id="main">
+    <div class="cl">&nbsp;</div>
+    <!-- Content -->
+    <div id="content">
+      <!-- Content Slider -->
+      <div id="slider" class="box">
+        <div id="slider-holder">
+          <ul>
+            <li><a href="#"><img src="css/images/burrito-chicken-close-up-461198.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="css/images/beef-bread-burger-156114.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="css/images/baked-beer-cheese-724216.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="css/images/appetizer-breakfast-cuisine-326278.jpg" alt="" /></a></li>
+          </ul>
+        </div>
+        <div id="slider-nav"> <a href="#" class="active">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> </div>
+      </div>
+      <!-- End Content Slider -->
+      <!-- Products -->
+	  <div class="product">
+	  
+	  <!----this is content area......---->
+          <asp:ContentPlaceHolder ID="c1" runat="server"></asp:ContentPlaceHolder>
+	  </div>
+
+      <!-- End Products -->
+    </div>
+    <!-- End Content -->
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <!-- Search -->
+      <div class="box search">
+        <h2>Search by <span></span></h2>
+        <div class="box-content">
+         
+            <br/>
+            <label>Product Name</label>
+            <input type="text" class="field" id="searchtextbox"/>
+
+            <input type="button" class="search-submit" value="Search" onclick="search();" />
+            <p> please enter item name inside the textbox</p>
+        
+        </div>
+      </div>
+      <!-- End Search -->
+      <!-- Categories -->
+      <div class="box categories">
+        <h2> Food Categories <span></span></h2>
+        <div class="box-content">
+          <ul>
+            
+           <asp:DataList ID="dd" runat="server">
+               <ItemTemplate>
+         <li><a href="display_item.aspx?category=<%#Eval("product_category") %>"> <%#Eval("product_category") %></a></li>
+               </ItemTemplate> 
+
+
+           </asp:DataList>
+
+          </ul>
+        </div>
+      </div>
+      <!-- End Categories -->
+    </div>
+    <!-- End Sidebar -->
+    <div class="cl">&nbsp;</div>
+  </div>
+  <!-- End Main -->
+  <!-- Side Full -->
+  <div class="side-full">
+    <!-- More Products -->
+    <div class="more-products">
+      <div class="more-products-holder">
+        <ul>
+          <li><a href="#"><img src="css/images/09_Fast_Foods-You-Should-Never-Eat-if-You-Want-to-Live-a-Long-Life_583485004_Nitr-760x506.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/amighettis-sub-sandwich_istock1-620x320.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/Cheap-Fast-Food-Options-McDonalds.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/eight_col_chips.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/Foods-That-Help-or-Hurt-Anxiety-02-1440x810.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/Foods-That-Help-or-Hurt-Anxiety-10-1440x810.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/Sandwich spinach.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/0_fastfood.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/700_FO42167016_1b4d39e48f1774592ba33d51cac6d891.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/can-and-glass-of-pepsi-cola-487787086-5ad64304c5542e00363644bd.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/tim-hortons-grilled-wraps.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/The-Best-Carrot-Cake-with-Cream-Cheese-Frosting-15.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/taco_bell__ingredients_beef__deadly_occupycorporatism.jpg_423682103.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/outback-oferece-batatas-fritas.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/mcdonalds-triple-breakfast-stacks_750xx676-380-42-0.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/KFC newPDF.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/FEMSA-quits-Coca-Cola-Philippines-venture-five-years-after-taking-51-stake_wrbm_large.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/triple-chocolate-cake-4.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/1-Odlichna-prichina-za-da-jadete-sladoled-vo-zima-www.kafepauza.mk_.jpg" alt="" /></a></li>
+          <li><a href="display_item.aspx"><img src="css/images/24AI0416-19_xlarge.jpg" alt="" /></a></li>
+          <li class="last"><a href="display_item.aspx"><img src="css/images/burbur.jpg" alt="" /></a></li>
+        </ul>
+      </div>
+      <div class="more-nav"> <a href="#" class="prev">&nbsp;&nbsp; </a>&nbsp;<a href="#" class="next">next</a> </div>
+    </div>
+    <!-- End More Products -->
+    <!-- Text Cols -->
+   <!-- <div class="cols">
+      <div class="cl">&nbsp;</div>
+      <div class="col">
+        <h3 class="ico ico1">Donec imperdiet</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet, metus ac cursus auctor, arcu felis ornare dui.</p>
+        <p class="more"><a href="#" class="bul">Lorem ipsum</a></p>
+      </div>
+      <div class="col">
+        <h3 class="ico ico2">Donec imperdiet</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet, metus ac cursus auctor, arcu felis ornare dui.</p>
+        <p class="more"><a href="#" class="bul">Lorem ipsum</a></p>
+      </div>
+      <div class="col">
+        <h3 class="ico ico3">Donec imperdiet</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet, metus ac cursus auctor, arcu felis ornare dui.</p>
+        <p class="more"><a href="#" class="bul">Lorem ipsum</a></p>
+      </div>
+      <div class="col col-last">
+        <h3 class="ico ico4">Donec imperdiet</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet, metus ac cursus auctor, arcu felis ornare dui.</p>
+        <p class="more"><a href="#" class="bul">Lorem ipsum</a></p>
+      </div>
+      <div class="cl">&nbsp;</div>
+    </div>-->
+    <!-- End Text Cols -->
+  </div>
+  <!-- End Side Full -->
+  <!-- Footer -->
+  <div id="footer">
+    <p class="left">  <a href="display_item.aspx">food bucket</a> <span>|</span> <a href="registration.aspx">Registration</a> <span>|</span> 
+         <%
+              if(Session["user"] == null)
+              {
+                  %>
+
+               <a href="login.aspx">Login</a>
+          <%
+
+              }
+              else
+              {
+
+                    %>
+
+              <a href="display_order.aspx">Display order</a><span>|</span>
+
+               <a href="logout.aspx">Logout</a>
+          <%
+
+              }
+
+
+               %>
+       <span>|</span> <a href="contact_us.aspx">Contact Us</a>
+       <span>|</span> <a href="adminlogin.aspx">Admin</a>
+    </p>
+    <p class="right"> Order your favourite foods </p>
+  </div>
+  <!-- End Footer -->
+</div>
+<!-- End Shell -->
+          </form>
+
+
+    <script type="text/javascript">
+        function search() {
+
+            window.location = "display_item.aspx?search=" + document.getElementById("searchtextbox").value;
+
+
+        }
+
+
+    </script>
+</body>
+</html>
